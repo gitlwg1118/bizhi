@@ -1,0 +1,46 @@
+<include file="public@header"/>
+</head>
+<body>
+<div class="wrap">
+    <ul class="nav nav-tabs">
+        <li class="active"><a>小程序订单</a></li>
+    </ul>
+    <form method="post" class="js-ajax-form margin-top-20">
+        <!--<section id="search"  style="position: relative;font-size: 18px;margin: 10px auto 0;">-->
+        <!--    <button type="submit" id="b" class="btn btn-primary js-ajax-submit" style="position: absolute;right: 0px;"><i class="fa fa-search" aria-hidden="true">搜索</i></button>-->
+        <!--    <input value="" id="search-input" class="form-control" placeholder="请输入微信名搜索" autocomplete="off" spellcheck="false" autocorrect="off" tabindex="1" name="nickname" style="padding-right: 43px;">-->
+        <!--</section>-->
+        <table class="table table-hover table-bordered">
+            <thead>
+            <tr>
+                <th>订单ID</th>
+                <th>小程序</th>
+                <th>用户名</th>
+                <th>头像</th>
+                <th>订单金额（元）</th>
+                <th>用户订单号</th>
+                <th>商户订单号</th>
+                <th>支付时间</th>
+            </tr>
+            </thead>
+            <tbody>
+            <foreach name="lists" item="vo">
+                <tr>
+                    <td>{$vo.id}</td>
+                    <td>{$vo.third_party}</td>
+                    <td>{$vo.nickname}</td>
+                    <td><img width="25" height="25" src="{$vo.avatar}"/></td>
+                    <td><p style="color:red">{$vo.total_fee}</p></p></td>
+                    <td>{$vo.transaction_id}</td>
+                    <td>{$vo.out_trade_no}</td>
+                    <td>{$vo['time_end']}</td>
+                </tr>
+            </foreach>
+            </tbody>
+        </table>
+        <ul class="pagination">{$page}</ul>
+    </form>
+</div>
+<script src="__STATIC__/js/admin.js"></script>
+</body>
+</html>

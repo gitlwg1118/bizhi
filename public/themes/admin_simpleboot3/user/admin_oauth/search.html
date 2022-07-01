@@ -1,0 +1,55 @@
+<include file="public@header"/>
+</head>
+<body>
+<div class="wrap">
+    <ul class="nav nav-tabs">
+        <li><a href="{:url('adminOauth/index')}">小程序用户</a></li>
+        <li class="active"><a>搜索</a></li>
+    </ul>
+    <form method="post" class="js-ajax-form margin-top-20" action="{:url('adminOauth/search')}">
+        <section id="search"  style="position: relative;font-size: 18px;margin: 10px auto 0;">
+            <button type="submit" id="b" class="btn btn-primary js-ajax-submit" style="position: absolute;right: 0px;"><i class="fa fa-search" aria-hidden="true">搜索</i></button>
+            <input value="" id="search-input" class="form-control" placeholder="请输入微信名搜索" autocomplete="off" spellcheck="false" autocorrect="off" tabindex="1" name="nickname" style="padding-right: 43px;">
+        </section>
+        <table class="table table-hover table-bordered">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>小程序</th>
+                <th>{:lang('AVATAR')}</th>
+                <th>是否会员</th>
+                <th>微信名</th>
+                <th>{:lang('FIRST_LOGIN_TIME')}</th>
+                <th>{:lang('LAST_LOGIN_TIME')}</th>
+                <th>{:lang('LAST_LOGIN_IP')}</th>
+                <th>{:lang('LOGIN_TIMES')}</th>
+                <th align="center">{:lang('ACTIONS')}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <foreach name="lists" item="vo">
+                <tr>
+                    <td>{$vo.id}</td>
+                    <td>{$vo.third_party}</td>
+                    <td><img width="25" height="25" src="{$vo.avatar}"/></td>
+                    <td><if condition=" $vo.isvip  eq 1"><p style="color:red">是</p><else />否</if></td>
+                    <td>{$vo.user_nickname}</td>
+                    <td>{:date('Y-m-d H:i:s',$vo['create_time'])}</td>
+                    <td>{:date('Y-m-d H:i:s',$vo['last_login_time'])}</td>
+                    <td>{$vo.last_login_ip}</td>
+                    <td>{$vo.login_times}</td>
+                    <td>
+                        <a class="btn btn-xs btn-primary" href="{:url('adminOauth/edit',array('id'=>$vo['id']))}">{:lang('EDIT')}</a>
+                        <a class="btn btn-xs btn-danger js-ajax-delete"
+                           href="{:url('adminOauth/delete',array('id'=>$vo['id']))}">{:lang('DELETE')}</a>
+                    </td>
+                </tr>
+            </foreach>
+            </tbody>
+        </table>
+        <ul class="pagination">{$page}</ul>
+    </form>
+</div>
+<script src="__STATIC__/js/admin.js"></script>
+</body>
+</html>
